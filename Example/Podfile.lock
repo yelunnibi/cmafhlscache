@@ -1,0 +1,38 @@
+PODS:
+  - cmafhlscache (0.1.0):
+    - GCDWebServer (~> 3.5.4)
+    - PINCache (~> 3.0)
+  - GCDWebServer (3.5.4):
+    - GCDWebServer/Core (= 3.5.4)
+  - GCDWebServer/Core (3.5.4)
+  - PINCache (3.0.3):
+    - PINCache/Arc-exception-safe (= 3.0.3)
+    - PINCache/Core (= 3.0.3)
+  - PINCache/Arc-exception-safe (3.0.3):
+    - PINCache/Core
+  - PINCache/Core (3.0.3):
+    - PINOperation (~> 1.2.1)
+  - PINOperation (1.2.2)
+
+DEPENDENCIES:
+  - cmafhlscache (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - GCDWebServer
+    - PINCache
+    - PINOperation
+
+EXTERNAL SOURCES:
+  cmafhlscache:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  cmafhlscache: 1997f5526079ada712d85d30e33ea08549998776
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
+  PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
+  PINOperation: daa34d4aa1d8449089be7d405b9d974abc4724c6
+
+PODFILE CHECKSUM: 97d3ad09f6e5de5f555b2240d92340a0695e25d1
+
+COCOAPODS: 1.15.2

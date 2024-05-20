@@ -21,14 +21,14 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/applezy/cmafhlscache'
+  s.homepage         = 'https://github.com/yelunnibi/cmafhlscache.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'applezy' => '19902075128@sohu.com' }
-  s.source           = { :git => 'https://github.com/applezy/cmafhlscache.git', :tag => s.version.to_s }
+  s.author           = { 'applezy' => 'test@test.com' }
+  s.source           = { :git => 'https://github.com/yelunnibi/cmafhlscache.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '14.0'
 
   s.source_files = 'cmafhlscache/Classes/**/*'
   
@@ -38,5 +38,7 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+#   s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'GCDWebServer', '~> 3.5.4'
+  s.dependency 'PINCache', '~> 3.0'
 end

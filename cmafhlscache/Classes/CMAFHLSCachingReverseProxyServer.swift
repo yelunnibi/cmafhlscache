@@ -171,7 +171,7 @@ open class CMAFHLSCachingReverseProxyServer {
             .components(separatedBy: .newlines)
             .map { line in
                 var resline = self.processPlaylistLine(line, forOriginURL: originURL)
-                print("\n**CmafCache:-line=\(line)\n**CmafCache:-替换后=\(resline)")
+//                print("\n**CmafCache:-line=\(line)\n**CmafCache:-替换后=\(resline)")
                 return resline
             }
             .joined(separator: "\n")

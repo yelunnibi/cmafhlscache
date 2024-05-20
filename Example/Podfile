@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'cmafhlscache_Example' do
+  pod 'cmafhlscache', :path => '../'
+
+  target 'cmafhlscache_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

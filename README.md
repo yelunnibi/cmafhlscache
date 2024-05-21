@@ -7,7 +7,32 @@
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+可以缓存HLS CMAF格式视频，
+原理如下：
+
+![原理](https://user-images.githubusercontent.com/931655/69081879-45206a80-0a82-11ea-8fca-3c09f3b1ebb1.png)
+
+1. **User** sets a reverse proxy url to the `AVPlayer` instead of the origin url.
+    ```diff
+    - https://example.com/vod.m3u8
+    + http://127.0.0.1:8080/vod.m3u8?__hls_origin_url=https://example.com/vod.m3u8
+    ```
+2. **AVPlayer** requests a playlist(`.m3u8`) to the local reverse proxy server.
+3. **Reverse proxy server** fetches the origin playlist and replaces all URIs to point the localhost.
+    ```diff
+      #EXTM3U
+      #EXTINF:12.000,
+    - vod_00001.ts
+    + http://127.0.0.1:8080/vod.m3u8?__hls_origin_url=https://example.com/vod_00001.ts
+      #EXTINF:12.000,
+    - vod_00002.ts
+    + http://127.0.0.1:8080/vod.m3u8?__hls_origin_url=https://example.com/vod_00002.ts
+      #EXTINF:12.000,
+    - vod_00003.ts
+    + http://127.0.0.1:8080/vod.m3u8?__hls_origin_url=https://example.com/vod_00003.ts
+    ```
+4. **AVPlayer** requests segments(`.ts`) to the local reverse proxy server.
+5. **Reverse proxy server** fetches the origin segment and caches it. Next time the server will return the cached data for the same segment.
 
 appdelegate
 ```swift 
@@ -37,7 +62,7 @@ cmafhlscache is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'cmafhlscache'
+  pod 'cmafhlscache', :git => "https://github.com/yelunnibi/cmafhlscache.git", :branch => 'main'
 ```
 
 ## Author

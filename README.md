@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/cmafhlscache.svg?style=flat)](https://cocoapods.org/pods/cmafhlscache)
 [![Platform](https://img.shields.io/cocoapods/p/cmafhlscache.svg?style=flat)](https://cocoapods.org/pods/cmafhlscache)
 
-## Example
+## 原理
 
 可以缓存HLS CMAF格式视频，
 原理如下：
@@ -33,6 +33,8 @@
     ```
 4. **AVPlayer** requests segments(`.ts`) to the local reverse proxy server.
 5. **Reverse proxy server** fetches the origin segment and caches it. Next time the server will return the cached data for the same segment.
+
+## Usage
 
 appdelegate
 ```swift 

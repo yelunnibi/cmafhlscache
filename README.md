@@ -9,6 +9,26 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+appdelegate
+```swift 
+CMAFHLSCachingReverseProxyServer.setUp()
+CMAFHLSCachingReverseProxyServer.sharedInstance?.start()
+```
+
+vc
+```swift
+        let reverseProxyURL = CMAFHLSCachingReverseProxyServer.sharedInstance?.reverseProxyURL(from: playlistURL)! ?? URL(string: "www.apple.com")
+        let playerItem = AVPlayerItem(url: reverseProxyURL!)
+        player = AVPlayer(playerItem: playerItem)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = view.bounds // 将视频画面填充到特定的UIView中
+        view.layer.addSublayer(playerLayer)
+        player.currentItem?.preferredForwardBufferDuration = 1
+        player.play()
+```
+
+
+
 ## Requirements
 
 ## Installation

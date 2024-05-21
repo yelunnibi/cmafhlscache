@@ -14,32 +14,42 @@ open class CMAFHLSCachingReverseProxyServer {
     public static var sharedInstance: CMAFHLSCachingReverseProxyServer?
     
     /// 启动配置
-    public static func setUp() -> CMAFHLSCachingReverseProxyServer? {
+    public static func setUp(maxBytes: UInt = 500 * 1000 * 1000) -> CMAFHLSCachingReverseProxyServer? {
         if sharedInstance != nil {
             return sharedInstance
         }
         sharedInstance = CMAFHLSCachingReverseProxyServer(webServer: GCDWebServer(), urlSession: URLSession.shared, cache: PINCache.shared)
-        sharedInstance?.start(port: 8080)
+        PINCache.shared.diskCache.byteLimit = UInt(maxBytes)
         return sharedInstance
     }
 
-  public init(webServer: GCDWebServer, urlSession: URLSession, cache: PINCaching) {
+init(webServer: GCDWebServer, urlSession: URLSession, cache: PINCaching) {
     self.webServer = webServer
     self.urlSession = urlSession
     self.cache = cache
-
     self.addRequestHandlers()
   }
-
+   
+    /// 当前缓存大小
+    public var diskByteCount: UInt {
+        return PINCache.shared.diskByteCount
+    }
+    
+    /// 清理缓存
+    public func emptyCache() {
+        PINDiskCache.emptyTrash()
+    }
+    
 
   // MARK: Starting and Stopping Server
-
-  open func start(port: UInt) {
+  /// 开启服务默认8080
+  open func start(port: UInt = 8080) {
     guard !self.webServer.isRunning else { return }
     self.port = Int(port)
     self.webServer.start(withPort: port, bonjourName: nil)
   }
-
+  
+  /// 关闭服务
   open func stop() {
     guard self.webServer.isRunning else { return }
     self.port = nil
@@ -48,9 +58,15 @@ open class CMAFHLSCachingReverseProxyServer {
 
 
   // MARK: Resource URL
-
+ /// 代理地址
   open func reverseProxyURL(from originURL: URL) -> URL? {
-    guard let port = self.port else { return nil }
+      guard let port = self.port else {
+          print("\n**CmafCache: 错误- port 端口 = nil")
+          return nil }
+      guard self.webServer.isRunning == true else {
+          print("\n**CmafCache: 错误- 服务没有开启")
+          return nil
+      }
 
     guard var components = URLComponents(url: originURL, resolvingAgainstBaseURL: false) else { return nil }
     components.scheme = "http"

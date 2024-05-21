@@ -67,10 +67,6 @@ it, simply add the following line to your Podfile:
   pod 'cmafhlscache', :git => "https://github.com/yelunnibi/cmafhlscache.git", :branch => 'main'
 ```
 
-## Author
-
-applezy, 19902075128@sohu.com
-
 ## License
 
 cmafhlscache is available under the MIT license. See the LICENSE file for more info.
